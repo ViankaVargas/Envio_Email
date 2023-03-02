@@ -31,9 +31,16 @@ document.addEventListener('DOMContentLoaded', function() {
     */
     function validar (e) {
         if(e.target.value.trim() === '') { //agregar el .trim para eliminar los espacios en blanco
-            console.log('Está vacío');
+            mostrarAlerta();
         }else {
             console.log('Sí hay algo');
         }
+    }
+
+    function mostrarAlerta(){
+        //Generar alerta en HTML
+        const error = document.createElement('P');
+        error.textContent = 'Hubo un error...';
+        console.log(error);
     }
 });
