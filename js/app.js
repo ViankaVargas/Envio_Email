@@ -32,21 +32,27 @@ document.addEventListener('DOMContentLoaded', function() {
     */
     function validar (e) {
         //console.log(e.target.id); //muestra en consola el id que usó el evento blur
+        //console.log(e.target); //muestra en consola el input que tuvo el evento blur
+        //console.log(e.target.parentElement.nextElementSibling);//muestra en la consola el div que contiene el input SIGUIENTE
+        //console.log(e.target.parentElement); //muestra en la consola el div que contiene el input (el elemento padre)
         if(e.target.value.trim() === '') { //agregar el .trim para eliminar los espacios en blanco
-            mostrarAlerta(`El campo ${e.target.id} es obligatorio`);
+            mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);
         }else {
             console.log('Sí hay algo');
         }
     }
 
-    function mostrarAlerta(mensaje){
+    function mostrarAlerta(mensaje, referencia){
         //Generar alerta en HTML
         const error = document.createElement('P');
         error.textContent = mensaje;
         error.classList.add('bg-red-600', 'text-white', 'p-2', 'text-center');
         
         //Inyectar el error al formulario
-        formulario.appendChild(error); //appendChild agrega un nuevo elemento a lo que ya existe y lo muestra al final, antes del cierre del form
+        //formulario.appendChild(error); //appendChild agrega un nuevo elemento a lo que ya existe y lo muestra al final, antes del cierre del form
+        
+        //Inyectar el error al formulario
+        referencia.appendChild(error); //muestra la alerta en el input correspondiente 
         //formulario.innerHTML = error; //innerHTML reemplaza todo el contenido borrando todo
         //formulario.innerHTML = error.innerHTML; //innerHTML reemplaza todo el contenido borrando todo y poniendo el mensaje enviado
     }
