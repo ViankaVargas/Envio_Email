@@ -24,7 +24,16 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('desde la función de validar');
     }
     */
+   /*
     function validar (e) {
         console.log(e.target.value);
+    }
+    */
+    function validar (e) {
+        if(e.target.value.trim() === '') { //agregar el .trim para eliminar los espacios en blanco
+            console.log('Está vacío');
+        }else {
+            console.log('Sí hay algo');
+        }
     }
 });
