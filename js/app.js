@@ -31,17 +31,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     */
     function validar (e) {
+        //console.log(e.target.id); //muestra en consola el id que usó el evento blur
         if(e.target.value.trim() === '') { //agregar el .trim para eliminar los espacios en blanco
-            mostrarAlerta();
+            mostrarAlerta(`El campo ${e.target.id} es obligatorio`);
         }else {
             console.log('Sí hay algo');
         }
     }
 
-    function mostrarAlerta(){
+    function mostrarAlerta(mensaje){
         //Generar alerta en HTML
         const error = document.createElement('P');
-        error.textContent = 'Hubo un error...';
+        error.textContent = mensaje;
         error.classList.add('bg-red-600', 'text-white', 'p-2', 'text-center');
         
         //Inyectar el error al formulario
