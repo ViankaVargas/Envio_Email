@@ -37,9 +37,10 @@ document.addEventListener('DOMContentLoaded', function() {
         //console.log(e.target.parentElement); //muestra en la consola el div que contiene el input (el elemento padre)
         if(e.target.value.trim() === '') { //agregar el .trim para eliminar los espacios en blanco
             mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);
-        }else {
-            console.log('Sí hay algo');
+            return;
         }
+       //console.log('después del if');
+       limpiarAlerta(e.target.parentElement);
     }
 
     function mostrarAlerta(mensaje, referencia){
@@ -47,11 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
         //const alerta = document.querySelector('.bg-red-600'); //busca la alerta en todo el documento
        //console.log(alerta); //Si ya existe una alerta, muestra en consola el P donde está la alerta 
         
-       const alerta = referencia.querySelector('.bg-red-600'); //limita la búsqueda, buscando la alerta en el div donde se encuentra el input donde se est+a escribiendo
-       if(alerta) {
-            alerta.remove();//Elimina las múltiples alertas, eliminando la alerta previa
-        }
-
+       limpiarAlerta(referencia);
+        
         //Generar alerta en HTML
         const error = document.createElement('P');
         error.textContent = mensaje;
@@ -64,5 +62,13 @@ document.addEventListener('DOMContentLoaded', function() {
         referencia.appendChild(error); //muestra la alerta en el input correspondiente 
         //formulario.innerHTML = error; //innerHTML reemplaza todo el contenido borrando todo
         //formulario.innerHTML = error.innerHTML; //innerHTML reemplaza todo el contenido borrando todo y poniendo el mensaje enviado
+    }
+
+    function limpiarAlerta(referencia) {
+        //console.log('Desde limpiar alerta');
+        const alerta = referencia.querySelector('.bg-red-600'); //limita la búsqueda, buscando la alerta en el div donde se encuentra el input donde se est+a escribiendo
+        if(alerta) {
+            alerta.remove();//Elimina las múltiples alertas, eliminando la alerta previa
+        }
     }
 });
