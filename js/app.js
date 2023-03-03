@@ -43,6 +43,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function mostrarAlerta(mensaje, referencia){
+        //Comprueba si ya existe una alerta
+        //const alerta = document.querySelector('.bg-red-600'); //busca la alerta en todo el documento
+       //console.log(alerta); //Si ya existe una alerta, muestra en consola el P donde está la alerta 
+        
+       const alerta = referencia.querySelector('.bg-red-600'); //limita la búsqueda, buscando la alerta en el div donde se encuentra el input donde se est+a escribiendo
+       if(alerta) {
+            alerta.remove();//Elimina las múltiples alertas, eliminando la alerta previa
+        }
+
         //Generar alerta en HTML
         const error = document.createElement('P');
         error.textContent = mensaje;
