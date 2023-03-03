@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputMensaje = document.querySelector('#mensaje');
     const formulario = document.querySelector('#formulario');
     const btnSubmit = document.querySelector('#formulario button[type="submit"]');
+    const btnReset = document.querySelector('#formulario button[type="reset"]');
 
     //Asignar elementos
     //blur se ejecuta cuando se abandona el input
@@ -30,6 +31,19 @@ document.addEventListener('DOMContentLoaded', function() {
     inputEmail.addEventListener('input', validar); //Sin paréntesis funciona hasta que suceda el evento
     inputAsunto.addEventListener('input', validar);
     inputMensaje.addEventListener('input', validar);
+
+    btnReset.addEventListener('click', function(e){
+        e.preventDefault(); //previene por default para decirle por código lo que se quiere hacer al presionar el btnReset
+        
+        //Reiniciar el objeto
+        email.email = '';
+        email.asunto = '';
+        email.mensaje = '';
+
+        formulario.reset();
+        comprobarEmail();
+
+    });
     /*
     function validar () {
         console.log('desde la función de validar');
