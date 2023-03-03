@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const formulario = document.querySelector('#formulario');
     const btnSubmit = document.querySelector('#formulario button[type="submit"]');
     const btnReset = document.querySelector('#formulario button[type="reset"]');
+    const spinner = document.querySelector('#spinner');
 
     //Asignar elementos
     //blur se ejecuta cuando se abandona el input
@@ -32,6 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
     inputAsunto.addEventListener('input', validar);
     inputMensaje.addEventListener('input', validar);
 
+    formulario.addEventListener('submit', enviarEmail);
+
     btnReset.addEventListener('click', function(e){
         e.preventDefault(); //previene por default para decirle por código lo que se quiere hacer al presionar el btnReset
         
@@ -44,6 +47,14 @@ document.addEventListener('DOMContentLoaded', function() {
         comprobarEmail();
 
     });
+
+    function enviarEmail(e) {
+        e.preventDefault();
+
+        //console.log('enviando...');
+        spinner.classList.add('flex');
+        spinner.classList.remove('hidden');
+    }
     /*
     function validar () {
         console.log('desde la función de validar');
