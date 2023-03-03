@@ -38,6 +38,17 @@ document.addEventListener('DOMContentLoaded', function() {
     btnReset.addEventListener('click', function(e){
         e.preventDefault(); //previene por default para decirle por código lo que se quiere hacer al presionar el btnReset
         resetFormulario();
+
+        //Elimina todas las alertas al dar click al btnReset
+        if(email.email == ''){
+            limpiarAlerta(e.target.parentElement.parentElement.parentElement);
+        }
+        if(email.asunto == ''){
+            limpiarAlerta(e.target.parentElement.parentElement.parentElement);
+        }
+        if(email.mensaje == ''){
+            limpiarAlerta(e.target.parentElement.parentElement.parentElement);
+        }
     });
 
     function enviarEmail(e) {
@@ -90,7 +101,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         //validarEmail(e.target.value); //muestra en consola false si no cumple con la expresión regular o true si cumple
        //console.log('después del if');
-
        if(e.target.id === 'email' && !validarEmail(e.target.value)) {
         mostrarAlerta('El email no es válido', e.target.parentElement);
         email[e.target.name] = '';
@@ -156,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
         btnSubmit.disabled = false;
     }
 
-    function resetFormulario () {
+    function resetFormulario() {
         //Reiniciar el objeto
         email.email = '';
         email.asunto = '';
@@ -165,4 +175,5 @@ document.addEventListener('DOMContentLoaded', function() {
         formulario.reset();
         comprobarEmail();
     }
+        
 });
