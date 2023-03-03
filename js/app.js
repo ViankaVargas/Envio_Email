@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputAsunto = document.querySelector('#asunto');
     const inputMensaje = document.querySelector('#mensaje');
     const formulario = document.querySelector('#formulario');
+    const btnSubmit = document.querySelector('#formulario button[type="submit"]');
 
     //Asignar elementos
     //blur se ejecuta cuando se abandona el input
@@ -26,9 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     */
     //inputEmail.addEventListener('blur', validar()); //con paréntesis manda a llamar de una vez la función
-    inputEmail.addEventListener('blur', validar); //Sin paréntesis funciona hasta que suceda el evento
-    inputAsunto.addEventListener('blur', validar);
-    inputMensaje.addEventListener('blur', validar);
+    inputEmail.addEventListener('input', validar); //Sin paréntesis funciona hasta que suceda el evento
+    inputAsunto.addEventListener('input', validar);
+    inputMensaje.addEventListener('input', validar);
     /*
     function validar () {
         console.log('desde la función de validar');
@@ -46,6 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
         //console.log(e.target.parentElement); //muestra en la consola el div que contiene el input (el elemento padre)
         if(e.target.value.trim() === '') { //agregar el .trim para eliminar los espacios en blanco
             mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);
+            email[e.target.name] = '';
+            comprobarEmail();
             return;
         }
 
@@ -54,6 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
        if(e.target.id === 'email' && !validarEmail(e.target.value)) {
         mostrarAlerta('El email no es válido', e.target.parentElement);
+        email[e.target.name] = '';
+        comprobarEmail();
         return;
        }
 
@@ -104,6 +109,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function comprobarEmail(){
-        console.log(Object.values(email).includes('')); //Toma todos los valores del objeto email y los asigna a un arreglo y verifica si al menos alguno de esos valores contiene un string vacío para retornar true
+        console.log(email);
+      //  console.log(Object.values(email).includes('')); //Toma todos los valores del objeto email y los asigna a un arreglo y verifica si al menos alguno de esos valores contiene un string vacío para retornar true
+        if(Object.values(email).includes('')) {
+            btnSubmit.classList.add('opacity-50');
+            btnSubmit.disabled = true;
+            return;
+        }
+        btnSubmit.classList.remove('opacity-50');
+        btnSubmit.disabled = false;
     }
 });
