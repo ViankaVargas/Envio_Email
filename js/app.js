@@ -37,15 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     btnReset.addEventListener('click', function(e){
         e.preventDefault(); //previene por default para decirle por código lo que se quiere hacer al presionar el btnReset
-        
-        //Reiniciar el objeto
-        email.email = '';
-        email.asunto = '';
-        email.mensaje = '';
-
-        formulario.reset();
-        comprobarEmail();
-
+        resetFormulario();
     });
 
     function enviarEmail(e) {
@@ -54,6 +46,12 @@ document.addEventListener('DOMContentLoaded', function() {
         //console.log('enviando...');
         spinner.classList.add('flex');
         spinner.classList.remove('hidden');
+
+        setTimeout(() => {
+            spinner.classList.remove('flex');
+            spinner.classList.add('hidden');
+            resetFormulario();
+        }, 3000); //3 segundos
     }
     /*
     function validar () {
@@ -143,5 +141,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         btnSubmit.classList.remove('opacity-50');
         btnSubmit.disabled = false;
+    }
+
+    function resetFormulario () {
+        //Reiniciar el objeto
+        email.email = '';
+        email.asunto = '';
+        email.mensaje = '';
+
+        formulario.reset();
+        comprobarEmail();
     }
 });
